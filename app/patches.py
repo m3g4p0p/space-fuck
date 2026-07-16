@@ -1,6 +1,4 @@
-from typing import Any
-from typing import Callable
-from typing import Coroutine
+from typing import Any, Callable, Coroutine
 
 from fastapi.routing import APIRoute
 from starlette.datastructures import URL
@@ -12,7 +10,7 @@ class PatchedRequest(Request):
 
     def url_for(self, __name, **path_params) -> URL:
         url = super().url_for(__name, **path_params)
-        return url.replace(scheme='')
+        return URL(path=url.path)
 
 
 class PatchedRoute(APIRoute):
